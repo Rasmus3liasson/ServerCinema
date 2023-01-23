@@ -6,33 +6,49 @@ const app = express();
 
 const movieInfo = "https://plankton-app-xhkom.ondigitalocean.app/api/movies";
 
-async function displayMovies() {
-  const res = await fetch(movieInfo);
-  const movieData = await res.json();
-  return movieData.data;
-}
-
-app.get("/", async (req, res) => {
+async function file(req, res) {
   const file = await fs.readFile("index.html");
   const data = await displayMovies();
   const cards = data.map((moviePicture) => {
-    return `<img class="cards" src="${moviePicture.attributes.image.url}" alt="">`;
+    return `<img class="cards" src="${moviePicture.attributes.image.url}" alt="${moviePicture.attributes.imdbId}">`;
   });
 
   const page = file.toString().replace("%Hej%", cards.join("\n"));
 
   res.type("html");
   res.send(page);
+}
+
+async function displayMovies() {
+  const res = await fetch(movieInfo);
+  const movieData = await res.json();
+  return movieData.data;
+}
+async function displayMovie(id) {
+  const res = await fetch(movieInfo + "/" + id);
+  const movieData = await res.json();
+  return movieData.data;
+}
+
+app.get("/movies/:id", async (req, res) => {
+  const movieID = await displayMovie(req.params.id);
+  if (movieID) {
+    const file = await fs.readFile("./pages/card.html");
+    const card = `<h1>${movieID.attributes.title}</h1>
+    <h3>${movieID.attributes.intro}</h3>
+    <img class="cards" src="${movieID.attributes.image.url}" alt="${movieID.attributes.imdbId}">
+    `;
+    const page = file.toString().replace("%Card%", card);
+    res.type("html");
+    res.send(page);
+  } else if (!movieID) {
+    res.status(404).end();
+  }
 });
 
-/* app.get("/", async (req, res) => {
-  const file = await fs.readFile("index.html");
+app.get("/", file);
 
-  const text = file.toString().replace("%Hej%", "najs");
-
-  res.type("html");
-  res.send(text);
-}); */
+app.get("/index.html", file);
 
 app.use("/static", express.static("./static"));
 
