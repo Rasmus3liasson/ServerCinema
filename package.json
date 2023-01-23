@@ -2,12 +2,11 @@
   "name": "lulenorthernlightscinema",
   "version": "1.0.0",
   "description": "Biograf i Luleå",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-
     "sass": "sass --no-source-map src/main.scss static/main.css",
-
-    "watch": "sass --no-source-map --watch src/main.scss static/main.css"
+    "watch": "sass --no-source-map --watch src/main.scss static/main.css",
+    "start": "nodemon ."
   },
   "repository": {
     "type": "git",
@@ -22,6 +21,7 @@
   "homepage": "https://github.com/liber09/LuleNorthernLightsCinema#readme",
   "dependencies": {
     "node-sass": "^8.0.0",
+    "nodemon": "^2.0.20",
     "sass": "^1.57.1"
   }
 }
