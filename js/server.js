@@ -52,6 +52,7 @@ app.get("/", file);
 
 async function staticFiles(res, htmlFile) {
   const file = await fs.readFile("./pages/" + htmlFile);
+
   res.type("html");
   res.send(file);
 }
