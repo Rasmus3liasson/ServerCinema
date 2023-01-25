@@ -1,12 +1,23 @@
 import express from "express";
-import fs from "fs/promises";
-import fetch from "node-fetch";
+
+import { marked } from "marked";
+import { displayMovie, displayMovies } from "../js/moviesData.js";
 
 const app = express();
 
-const movieInfo = "https://plankton-app-xhkom.ondigitalocean.app/api/movies";
+app.set("view engine", "ejs");
+app.set("views", "./views");
 
-async function file(req, res) {
+/* app.engine(
+  "ejs",
+  engine({
+    helpers: {
+      markdown: (md) => marked(md),
+    },
+  })
+); */
+
+/* async function moviesShow(req, res) {
   const file = await fs.readFile("index.html");
   const data = await displayMovies();
   const cards = data.map((moviePicture) => {
@@ -17,23 +28,18 @@ async function file(req, res) {
 
   res.type("html");
   res.send(page);
-}
+} */
 
-async function displayMovies() {
-  const res = await fetch(movieInfo);
-  const movieData = await res.json();
-  return movieData.data;
-}
-async function displayMovie(id) {
-  const res = await fetch(movieInfo + "/" + id);
-  const movieData = await res.json();
+/* async function staticFiles(res, htmlFile) {
+  const file = await fs.readFile("./pages/" + htmlFile);
 
-  return movieData.data;
-}
+  res.type("html");
+  res.send(file);
+} */
 
 app.get("/movies/:id", async (req, res) => {
   const movieID = await displayMovie(req.params.id);
-  if (movieID) {
+  /*  if (movieID) {
     const file = await fs.readFile("./pages/card.html");
     const card = `<h1>${movieID.attributes.title}</h1>
     <h3>${movieID.attributes.intro}</h3>
@@ -45,52 +51,68 @@ app.get("/movies/:id", async (req, res) => {
     res.send(page);
   } else if (!movieID) {
     res.status(404).end();
+  }  */
+
+  if (movieID) {
+    const card = `<h1>${movieID.attributes.title}</h1>
+    <h3>${movieID.attributes.intro}</h3>
+    <img class="cards" src="${movieID.attributes.image.url}" alt="${movieID.attributes.imdbId}">
+    
+    `;
+    res.render("movieInfo", { change: card });
+  } else if (!movieID) {
+    res.render("template", { change: "Denna film kunde inte hittas" });
+  } else {
+    res.status(404).end();
   }
 });
 
-app.get("/", file);
+/* app.get("/", moviesShow); */
 
-async function staticFiles(res, htmlFile) {
-  const file = await fs.readFile("./pages/" + htmlFile);
+app.get("/", async (req, res) => {
+  const data = await displayMovies();
+  const cards = data.map((moviePicture) => {
+    return `<a href="/movies/${moviePicture.id}"><img class="picture-container cards" src="${moviePicture.attributes.image.url}" alt="${moviePicture.attributes.imdbId}"></a>`;
+  });
 
-  res.type("html");
-  res.send(file);
-}
+  res.render("template", { change: cards.join("\n") });
+});
 
 app.get("/pages/about", async (req, res) => {
-  await staticFiles(res, "about.html");
+  res.render("about");
 });
 app.get("/pages/bistro-menu", async (req, res) => {
-  await staticFiles(res, "bistro-menu.html");
+  res.render("bistro-menu");
 });
 app.get("/pages/booking", async (req, res) => {
-  await staticFiles(res, "booking.html");
+  res.render("booking");
 });
 app.get("/pages/giftCard", async (req, res) => {
-  await staticFiles(res, "giftCard.html");
+  res.render("giftCard");
 });
 app.get("/pages/matiné", async (req, res) => {
-  await staticFiles(res, "matiné.html");
+  res.render("matine");
 });
 app.get("/pages/newsletter", async (req, res) => {
-  await staticFiles(res, "newsletter.html");
+  res.render("newsletter");
 });
 app.get("/pages/openingHours", async (req, res) => {
-  await staticFiles(res, "openingHours.html");
+  res.render("openingHours");
 });
 app.get("/pages/premiereFriday", async (req, res) => {
-  await staticFiles(res, "premiereFriday.html");
+  res.render("premierFriday");
 });
 app.get("/pages/ticket-info", async (req, res) => {
-  await staticFiles(res, "ticket-info.html");
+  res.render("ticketInfo");
 });
 app.get("/pages/upcoming", async (req, res) => {
-  await staticFiles(res, "upcoming.html");
+  res.render("upcoming");
 });
 app.get("/pages/wholeProgramPage", async (req, res) => {
-  await staticFiles(res, "wholeProgramPage.html");
+  res.render("wholeProgram");
 });
 
 app.use("/static", express.static("./static"));
+app.use("/js", express.static("./js"));
 
 app.listen(5080);

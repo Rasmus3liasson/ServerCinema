@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/main.css" />
+    <title>LuleNorthernLightsCinema</title>
+  </head>
+  <body>
+    <%- include("./partials/header-pages.ejs") %> <%-
+    include("./partials/sec-nav.ejs") %>
+
+    <main class="content">
+      <p>
+        Vill du ha koll på vad som händer hos oss, premiärer, specialvisningar
+        och biljettsläpp. Varannan vecka skickar vi ut ett nyhetsprev späckat
+        med filmnyheter!
+      </p>
+      <p>
+        <a href="#">Självklart vill jag prenumerera på nyhetsbrevet!!</a>
+      </p>
+      <img
+        src="../static/newsletter.png"
+        alt="Exempel nyhetsbrev"
+        width="300"
+        height="453"
+      />
+      <p>Exemplet är från vecka 40.</p>
+    </main>
+
+    <%- include("./partials/footer.ejs") %>
+
+    <script src="./js/script.js" type="module"></script>
+    <script src="./js/secNav/secNav.js" type="module"></script>
+  </body>
+</html>
