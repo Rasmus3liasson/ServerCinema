@@ -8,66 +8,27 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-/* app.engine(
-  "ejs",
-  engine({
-    helpers: {
-      markdown: (md) => marked(md),
-    },
-  })
-); */
-
-/* async function moviesShow(req, res) {
-  const file = await fs.readFile("index.html");
-  const data = await displayMovies();
-  const cards = data.map((moviePicture) => {
-    return `<a href="/movies/${moviePicture.id}"><img class="picture-container cards" src="${moviePicture.attributes.image.url}" alt="${moviePicture.attributes.imdbId}"></a>`;
-  });
-
-  const page = file.toString().replace("%Hej%", cards.join("\n"));
-
-  res.type("html");
-  res.send(page);
-} */
-
-/* async function staticFiles(res, htmlFile) {
-  const file = await fs.readFile("./pages/" + htmlFile);
-
-  res.type("html");
-  res.send(file);
-} */
-
 app.get("/movies/:id", async (req, res) => {
   const movieID = await displayMovie(req.params.id);
-  /*  if (movieID) {
-    const file = await fs.readFile("./pages/card.html");
-    const card = `<h1>${movieID.attributes.title}</h1>
-    <h3>${movieID.attributes.intro}</h3>
-    <img class="cards" src="${movieID.attributes.image.url}" alt="${movieID.attributes.imdbId}">
-    
-    `;
-    const page = file.toString().replace("%Card%", card);
-    res.type("html");
-    res.send(page);
-  } else if (!movieID) {
-    res.status(404).end();
-  }  */
 
   if (movieID) {
-    const card = `<h1>${movieID.attributes.title}</h1>
-    <h3>${movieID.attributes.intro}</h3>
-    <img class="cards" src="${movieID.attributes.image.url}" alt="${movieID.attributes.imdbId}">
-    
+    const card = `<div class="movieInfo">
+    <div class="text"><h1>${movieID.attributes.title}</h1>
+      <h3>${marked.parse(movieID.attributes.intro)}</h3></div>
+      <img class="cards" src="${movieID.attributes.image.url}" alt="${
+      movieID.attributes.imdbId
+    }"></div>
+  <div class="movie-info-button">
+  <button><a href="/">Tillbaka till filmerna</a></button>
+  </div>
     `;
     res.render("movieInfo", { change: card });
   } else if (!movieID) {
-    res.render("template", { change: "Denna film kunde inte hittas" });
-  } else {
-    res.status(404).end();
+    res.status(404).render("error", {
+      change: "Denna film kunde inte hittas",
+    });
   }
 });
-
-/* app.get("/", moviesShow); */
 
 app.get("/", async (req, res) => {
   const data = await displayMovies();
@@ -75,7 +36,7 @@ app.get("/", async (req, res) => {
     return `<a href="/movies/${moviePicture.id}"><img class="picture-container cards" src="${moviePicture.attributes.image.url}" alt="${moviePicture.attributes.imdbId}"></a>`;
   });
 
-  res.render("template", { change: cards.join("\n") });
+  res.render("layout", { change: cards.join("\n") });
 });
 
 app.get("/pages/about", async (req, res) => {
@@ -112,7 +73,16 @@ app.get("/pages/wholeProgramPage", async (req, res) => {
   res.render("wholeProgram");
 });
 
+app.get("/:movies", async (req, res) => {
+  const pagePath = req.params.movies;
+  if (pagePath != "movies/") {
+    res.status(404).end();
+  }
+});
+
 app.use("/static", express.static("./static"));
 app.use("/js", express.static("./js"));
 
 app.listen(5080);
+
+export default app;

@@ -1,0 +1,57 @@
+.cardInfo {
+  .movieInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem 0;
+    gap: 10rem;
+    .text {
+      max-width: 400px;
+      margin: 3rem 0;
+      line-height: 2rem;
+      @media screen and (max-width: $screen-breakpoint) {
+      }
+    }
+    .cards {
+      min-width: 200px;
+      max-width: 300px;
+      height: auto;
+      border-radius: 3rem;
+    }
+    @media screen and (max-width: $screen-breakpoint) {
+      flex-direction: column;
+      margin: 0 2rem;
+      gap: 2rem;
+      margin: 4rem 2rem;
+    }
+  }
+  .movie-info-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 100px;
+    background-color: $blue-color;
+
+    border: none;
+    border-radius: 3rem;
+    margin: 0 auto 4rem;
+
+    @media screen and (max-width: $screen-breakpoint) {
+      width: 13rem;
+    }
+
+    button {
+      background-color: $blue-color;
+      border: none;
+
+      a {
+        text-decoration: none;
+        color: $text-color;
+        background-color: $blue-color;
+        border: none;
+        font-size: 1.4rem;
+      }
+    }
+  }
+}

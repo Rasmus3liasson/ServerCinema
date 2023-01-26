@@ -826,3 +826,64 @@ main {
     max-width: 1000px;
   }
 }
+.cardInfo .movieInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4rem 0;
+  gap: 10rem;
+}
+.cardInfo .movieInfo .text {
+  max-width: 400px;
+  margin: 3rem 0;
+  line-height: 2rem;
+}
+.cardInfo .movieInfo .cards {
+  min-width: 200px;
+  max-width: 300px;
+  height: auto;
+  border-radius: 3rem;
+}
+@media screen and (max-width: 750px) {
+  .cardInfo .movieInfo {
+    flex-direction: column;
+    margin: 0 2rem;
+    gap: 2rem;
+    margin: 4rem 2rem;
+  }
+}
+.cardInfo .movie-info-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 100px;
+  background-color: #112d4e;
+  border: none;
+  border-radius: 3rem;
+  margin: 0 auto 4rem;
+}
+@media screen and (max-width: 750px) {
+  .cardInfo .movie-info-button {
+    width: 13rem;
+  }
+}
+.cardInfo .movie-info-button button {
+  background-color: #112d4e;
+  border: none;
+}
+.cardInfo .movie-info-button button a {
+  text-decoration: none;
+  color: #dbe2ef;
+  background-color: #112d4e;
+  border: none;
+  font-size: 1.4rem;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  margin: 8rem 0;
+}
