@@ -9,17 +9,17 @@ test("show status code 404", async () => {
   expect(response.status).toEqual(404);
 });
 
-test("Show correkt title of movie", async () => {
+test("Show correct title of movie", async () => {
   const moviesData = await displayMovies();
 
-  for (let i = 0; i < moviesData.length; i++) {
+  for (let j = 0; j < moviesData.length; j++) {
     const response = await request(app)
-      .get("/movies/" + moviesData[i].id)
+      .get("/movies/" + moviesData[j].id)
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200);
 
     expect(
-      response.text.includes(`${moviesData[i].attributes.title}`)
+      response.text.includes(`${moviesData[j].attributes.title}`)
     ).toBeTruthy();
   }
 });
