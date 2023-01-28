@@ -22,6 +22,7 @@ app.get("/movies/:id", async (req, res) => {
     }"></div>
   <div class="movie-info-button">
   <button><a href="/">Tillbaka till filmerna</a></button>
+  <button><a href="/booking">Boka film</a></button>
   </div>
     `;
     res.render("movieInfo", { change: card });

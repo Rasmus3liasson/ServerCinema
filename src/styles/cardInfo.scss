@@ -14,10 +14,14 @@
       }
     }
     .cards {
-      min-width: 200px;
+      min-width: 150px;
       max-width: 300px;
       height: auto;
       border-radius: 3rem;
+      @media screen and (max-width: $screen-breakpoint) {
+        width: 230px;
+        height: auto;
+      }
     }
     @media screen and (max-width: $screen-breakpoint) {
       flex-direction: column;
@@ -30,21 +34,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300px;
-    height: 100px;
-    background-color: $blue-color;
-
-    border: none;
-    border-radius: 3rem;
-    margin: 0 auto 4rem;
 
     @media screen and (max-width: $screen-breakpoint) {
-      width: 13rem;
+      flex-direction: column;
     }
 
     button {
       background-color: $blue-color;
       border: none;
+      width: 300px;
+      height: 100px;
+      background-color: $blue-color;
+
+      border: none;
+      border-radius: 3rem;
+      margin: 0 auto 4rem;
+      @media screen and (max-width: $screen-breakpoint) {
+        width: 12rem;
+        padding: 10px;
+      }
 
       a {
         text-decoration: none;

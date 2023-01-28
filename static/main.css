@@ -846,10 +846,16 @@ main {
   margin-top: 2rem;
 }
 .cardInfo .movieInfo .cards {
-  min-width: 200px;
+  min-width: 150px;
   max-width: 300px;
   height: auto;
   border-radius: 3rem;
+}
+@media screen and (max-width: 750px) {
+  .cardInfo .movieInfo .cards {
+    width: 230px;
+    height: auto;
+  }
 }
 @media screen and (max-width: 750px) {
   .cardInfo .movieInfo {
@@ -863,6 +869,15 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media screen and (max-width: 750px) {
+  .cardInfo .movie-info-button {
+    flex-direction: column;
+  }
+}
+.cardInfo .movie-info-button button {
+  background-color: #112d4e;
+  border: none;
   width: 300px;
   height: 100px;
   background-color: #112d4e;
@@ -871,13 +886,10 @@ main {
   margin: 0 auto 4rem;
 }
 @media screen and (max-width: 750px) {
-  .cardInfo .movie-info-button {
-    width: 13rem;
+  .cardInfo .movie-info-button button {
+    width: 12rem;
+    padding: 10px;
   }
-}
-.cardInfo .movie-info-button button {
-  background-color: #112d4e;
-  border: none;
 }
 .cardInfo .movie-info-button button a {
   text-decoration: none;
