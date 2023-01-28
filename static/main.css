@@ -838,6 +838,9 @@ main {
   margin: 3rem 0;
   line-height: 2rem;
 }
+.cardInfo .movieInfo .text p {
+  margin-top: 2rem;
+}
 .cardInfo .movieInfo .cards {
   min-width: 200px;
   max-width: 300px;

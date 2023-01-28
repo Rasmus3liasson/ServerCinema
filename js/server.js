@@ -36,7 +36,9 @@ app.get("/", async (req, res) => {
     return `<a href="/movies/${moviePicture.id}"><img class="picture-container cards" src="${moviePicture.attributes.image.url}" alt="${moviePicture.attributes.imdbId}"></a>`;
   });
 
-  res.render("layout", { change: cards.join("\n") });
+  res.render("layout", {
+    change: cards.join("\n"),
+  });
 });
 
 app.get("/pages/about", async (req, res) => {
