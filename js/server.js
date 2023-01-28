@@ -8,6 +8,8 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+// serva ejs
+
 app.get("/movies/:id", async (req, res) => {
   const movieID = await displayMovie(req.params.id);
 
@@ -25,7 +27,7 @@ app.get("/movies/:id", async (req, res) => {
     res.render("movieInfo", { change: card });
   } else if (!movieID) {
     res.status(404).render("error", {
-      change: "Denna film kunde inte hittas",
+      change: "Denna film kunde inte hittas status 404!",
     });
   }
 });
@@ -41,39 +43,41 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.get("/pages/about", async (req, res) => {
+app.get("/about", async (req, res) => {
   res.render("about");
 });
-app.get("/pages/bistro-menu", async (req, res) => {
+app.get("/bistro-menu", async (req, res) => {
   res.render("bistro-menu");
 });
-app.get("/pages/booking", async (req, res) => {
+app.get("/booking", async (req, res) => {
   res.render("booking");
 });
-app.get("/pages/giftCard", async (req, res) => {
+app.get("/giftCard", async (req, res) => {
   res.render("giftCard");
 });
-app.get("/pages/matiné", async (req, res) => {
+app.get("/matiné", async (req, res) => {
   res.render("matine");
 });
-app.get("/pages/newsletter", async (req, res) => {
+app.get("/newsletter", async (req, res) => {
   res.render("newsletter");
 });
-app.get("/pages/openingHours", async (req, res) => {
+app.get("/openingHours", async (req, res) => {
   res.render("openingHours");
 });
-app.get("/pages/premiereFriday", async (req, res) => {
+app.get("/premiereFriday", async (req, res) => {
   res.render("premierFriday");
 });
-app.get("/pages/ticket-info", async (req, res) => {
+app.get("/ticket-info", async (req, res) => {
   res.render("ticketInfo");
 });
-app.get("/pages/upcoming", async (req, res) => {
+app.get("/upcoming", async (req, res) => {
   res.render("upcoming");
 });
-app.get("/pages/wholeProgramPage", async (req, res) => {
+app.get("/wholeProgramPage", async (req, res) => {
   res.render("wholeProgram");
 });
+
+// status 404 if "id" don't exist.
 
 app.get("/:movies", async (req, res) => {
   const pagePath = req.params.movies;

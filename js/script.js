@@ -1,4 +1,4 @@
-import hamburger from "./frontpage/hamburger.js";
+import hamburger from "./hamburger.js";
 
 // adding cards to frontpage
 hamburger();

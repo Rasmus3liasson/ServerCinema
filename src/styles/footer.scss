@@ -6,6 +6,7 @@ footer {
   min-height: 150px;
   gap: 30px;
   font-family: $font-family;
+  margin-top: auto;
 
   @media screen and (min-width: $screen-breakpoint) {
     display: flex;
