@@ -16,7 +16,7 @@ app.get("/movies/:id", async (req, res) => {
   if (movieID) {
     const card = `<div class="movieInfo">
     <div class="text"><h1>${movieID.attributes.title}</h1>
-      <h3>${marked.parse(movieID.attributes.intro)}</h3></div>
+      ${marked.parse(movieID.attributes.intro)}</div>
       <img class="cards" src="${movieID.attributes.image.url}" alt="${
       movieID.attributes.imdbId
     }"></div>
