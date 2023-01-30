@@ -1,14 +1,14 @@
 import express from "express";
 
 import { marked } from "marked";
-import { displayMovie, displayMovies } from "../js/moviesData.js";
+import { displayMovie, displayMovies } from "./moviesData.js";
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-// serva ejs
+// serv ejs
 
 app.get("/movies/:id", async (req, res) => {
   const movieID = await displayMovie(req.params.id);

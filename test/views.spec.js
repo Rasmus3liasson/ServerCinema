@@ -1,7 +1,7 @@
 import request from "supertest";
-import { displayMovies } from "../js/moviesData";
+import { displayMovies } from "../server/moviesData";
 
-import app from "../js/server";
+import app from "../server/server";
 
 test("show status code 404", async () => {
   const response = await request(app).get("/movie");
