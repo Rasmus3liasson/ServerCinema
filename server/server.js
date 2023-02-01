@@ -36,7 +36,9 @@ app.get("/movies/:id", async (req, res) => {
 app.get("/", async (req, res) => {
   const data = await displayMovies();
   const cards = data.map((moviePicture) => {
-    return `<a href="/movies/${moviePicture.id}"><img class="picture-container cards" src="${moviePicture.attributes.image.url}" alt="${moviePicture.attributes.imdbId}"></a>`;
+    return `<ul>
+    <li><a href="/movies/${moviePicture.id}"><img class="picture-container cards" src="${moviePicture.attributes.image.url}" alt="${moviePicture.attributes.imdbId}"></a></li>
+  </ul>`;
   });
 
   res.render("layout", {
@@ -90,6 +92,6 @@ app.get("/:movies", async (req, res) => {
 app.use("/static", express.static("./static"));
 app.use("/js", express.static("./js"));
 
-app.listen(5080);
+app.listen(5081);
 
 export default app;

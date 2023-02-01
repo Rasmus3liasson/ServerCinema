@@ -402,6 +402,9 @@ main section img {
     height: auto;
   }
 }
+.picture-container li {
+  list-style: none;
+}
 
 .modal-container {
   display: none;
