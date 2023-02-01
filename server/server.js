@@ -92,6 +92,6 @@ app.get("/:movies", async (req, res) => {
 app.use("/static", express.static("./static"));
 app.use("/js", express.static("./js"));
 
-app.listen(5081);
+app.listen(5080);
 
 export default app;
